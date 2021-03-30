@@ -1,0 +1,19 @@
+
+.root {
+
+}
+.rowTwo {
+    margin-bottom: 10px;
+    display: grid; 
+    grid-template-columns: 65% auto; 
+    grid-gap: 30px;
+}
+
+@media (max-width:915px) {
+    .rowTwo {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto; 
+      grid-gap: 10 px;
+      margin-bottom: 10px;
+    }
+}

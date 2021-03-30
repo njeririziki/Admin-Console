@@ -1,0 +1,31 @@
+.root {
+
+    display: grid;
+    grid-template-columns: 65%  auto;
+
+    grid-gap: 20px;
+ 
+}
+
+ .timeline{
+  grid-row: span2;
+  grid-row-end: 3;
+ }
+ .accordion{
+    grid-row: span 2;
+   
+ }
+ .calendercards{
+   grid-column: span 2;
+ }
+
+@media (max-width:768px) {
+  .root{
+    grid-template-columns: 1fr;
+    grid-template-rows: auto; 
+    grid-gap: 10 px;
+  }
+  .totalscards{
+
+  }   
+}

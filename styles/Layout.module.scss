@@ -1,0 +1,108 @@
+$drawerwidth: 256px;
+$drawerwidthCollapse: 100px;
+$appbarHeight: 60px;
+
+.root{
+  
+    background-color: #ede7f6;
+    height: auto;
+    width: 100vw;
+    z-index: -1;
+}
+.header{
+  display: inline-flex;
+   height: $appbarHeight;
+  width: 100%;
+  background-color: #e8f5e9;
+  padding: 1em;
+ position: fixed;
+  overflow: 'auto';
+  z-index: 1;
+        &:nth-child(1){
+            padding-right: 2em;
+        }
+}
+ 
+.sider{
+   // background-color:#39796b;
+    color: #ffffff;
+    height: 100%;
+    overflow: 'auto';
+   // position: fixed;
+    transition: width 1s ease-in-out;
+}
+.layout2{
+  height: 100vh;
+  overflow: scroll;
+}
+.drawer{
+    height: 100%;
+   // background-color:#39796b;
+    color: #ffffff;
+    margin:0;
+    padding:0;
+    overflow: 'auto';
+  //  position: fixed;
+  transition: width 0s ;
+}
+.unauth{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.content{
+   height: 100%;
+    width: auto;
+   
+  //  margin-left: $drawerwidth;
+   // width: calc(100% - $drawerwidth);
+    margin-top: $appbarHeight;
+    // margin-left: 14px  ;
+     padding:3em 3em 0em 3em;
+   // min-height: 80vh; 
+   // background-color: #ffffff;
+}
+// fix this
+.in-active{
+ color:#ffffff;
+ &:focus {
+  color:#6ca2e7; 
+ }
+}
+.active{
+   color:#6ca2e7; 
+}
+.activeitem{
+  &:active{
+    background-color:#ede7f6;
+    color:#000000
+  }
+}
+@media (max-width: 700px) {
+  .content{
+   width: 100vw; 
+   margin-left: 0%;
+   margin-top: $appbarHeight;
+   padding : 1em 1em 1em 1em;
+  }
+  .drawer{
+      height: 100vh;
+      width:auto;
+      //overflow: auto;
+     position: relative;
+      margin-left:0;
+      margin-top: 0;
+      padding:0;
+      color: #000000;
+  }
+
+  .sider{
+    height: 100vh;
+   
+    margin:0;
+    padding: 0;
+     z-index: 2;
+    overflow: auto;
+     // position: fixed;
+  }
+}
