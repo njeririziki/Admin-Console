@@ -9,7 +9,7 @@ import Accordion from '@/components/List/Accordion'
 import Pie from '@/components/Cards/Pie'
 import List from '@/components/List/List'
 import CalenderCards from '@/components/Cards/Calender'
-import styles from '@/styles/Dashboard.module.scss'
+import styles from '@/styles/dashboard.module.scss'
  import {DollarSign,UserPlus,Users}  from 'react-feather'
 
  const dollar= <DollarSign size='20px'/>

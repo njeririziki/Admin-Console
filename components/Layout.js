@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { Grid, Button,Drawer,Typography, Layout} from 'antd';
 import { ChevronLeft} from 'react-feather';
 import{ MenuOutlined } from '@material-ui/icons'
-import styles from '../styles/Layout.module.scss'
+import styles from '../styles/layout.module.scss'
 import Menu from '@/components/drawer'
 
 const { Header, Content, Sider } = Layout;

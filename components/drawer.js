@@ -4,7 +4,7 @@ import { Menu, Button,Grid} from 'antd';
 import { DollarSign, ChevronRight, Home,Tool,Clipboard,Settings, Users} from 'react-feather';
 
 
-import styles from '@/styles/Layout.module.scss'
+import styles from '@/styles/layout.module.scss'
 import { useRouter } from "next/router";
 
 const ActiveLink = ({ children, href }) => {

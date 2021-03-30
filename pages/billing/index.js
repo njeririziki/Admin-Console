@@ -5,7 +5,7 @@ import Table from '@/components/tables/Expandable'
 import List from '@/components/List/List'
 import GridList from '@/components/Cards/Grid'
 import Pie from '@/components/Cards/Pie'
-import styles from '@/styles/Billing.module.scss'
+import styles from '@/styles/billing.module.scss'
 import {DollarSign,UserCheck,UserMinus,Send}  from 'react-feather'
 
 const dollar= <DollarSign size='20px'/>
