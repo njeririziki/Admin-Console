@@ -5,7 +5,7 @@ import Table from '@/components/tables/Expandable'
 import List from '@/components/List/List'
 import GridList from '@/components/Cards/Grid'
 import Pie from '@/components/Cards/Pie'
-import styles from '@/styles/billing.module.scss'
+import styles from '@/styles/Billing.module.scss'
 import {DollarSign,UserCheck,UserMinus,Send}  from 'react-feather'
 
 const dollar= <DollarSign size='20px'/>
@@ -37,7 +37,18 @@ const columns = [
               );
             }
          
-       , responsive: ['md']
+       , responsive: ['md'],
+       filters: [
+        {
+          text: 'Paid',
+          value: 'Paid',
+        },
+        {
+          text: 'Past due',
+          value: 'Past due',
+        },
+      ],
+      onFilter: (value, record) => record.status.indexOf(value) === 0,
       },
       {
         title: 'Action', key: 'action',
@@ -52,24 +63,33 @@ const columns = [
     
   ];
 
-const tableData =[
-{ client: 'Sheridan',
- number: 6788,
+  const tableData =[
+    { client: 'Sheridan',
+     number: 6788,
+      date: '12/2/2021',
+      amount: 12783,
+      status: 'Paid',
+    },
+    { client: 'Brandon',
+    number: 8765,
+    date: '17/2/2021',
+    amount: 15783,
+    status: 'Past due',
+    },
+    { client: 'Gerald',
+     number: 5368,
+      date: '14/2/2021',
+      amount: 32243,
+      status: 'Paid',
+    },
+    
+    { client: 'Brandon',
+    number: 9345,
+    date: '18/2/2021',
+    amount: 45703,
+    status: 'Past due',
+    }]
 
-  date: '12/2/2021',
-  amount: 12783,
-  status: 'Paid',
- 
-},
-{ client: 'Brandon',
-number: 8765,
-
-date: '17/2/2021',
-amount: 15783,
-status: 'Past due',
-
-
-}]
 
 const totals=[
     {title:'Sent Invoices', number: 134, icon:send, },
@@ -78,24 +98,25 @@ const totals=[
     {title: ' Monthly Total', number: 134310, icon:dollar}, 
 ]
 const pieData=[
-    {
-        id:'paid',
-        label: 'Paid ',
-        value: 30,
-        color: '#39796b'
-    },
+        {
+          id:'pending',
+          label: 'Pending ',
+          value: 20,
+          color: '#ff5252'
+      },
     {
         id:'invoiced',
         label: ' Invoiced',
-        value: 60,
-        color: '#e0e0e0'
+        value:30,
+        color: '#ede7f6'
     },
+ 
     {
-        id:'pending',
-        label: 'Pending ',
-        value: 10,
-        color: '#ff5252'
-    }
+      id:'paid',
+      label: 'Paid ',
+      value: 50,
+      color: '#39796b'
+  },
 ]
 
 const Billing =({profiles})=> {
