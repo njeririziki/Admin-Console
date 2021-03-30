@@ -4,21 +4,21 @@ import { List, Card, Typography, Divider } from 'antd'
  import Avatar from '@material-ui/core/Avatar'
 
  
-const PaymentsDueList = (props) => {
+const PaymentsDueList = ({data,date,header}) => {
     return ( <div>
         <Card > 
             <List
-        header={props.header}
-        dataSource ={props.data}
+        header={header}
+        dataSource ={data}
        // pagination={{pageSize:props.pageSize}}
         renderItem={item=> (
         <List.Item key={item.id}>
             <List.Item.Meta 
-           avatar={<Avatar src={props.avatar}/>}
+           avatar={<Avatar src={item.avatar}/>}
             title={item.name}
             description= {`${item.email}  ${item.phone}`}
             />
-           { <p>{props.date}</p>}
+           { date? <p>{date}</p>:''}
             </List.Item>)}
             
         /></Card>

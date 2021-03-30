@@ -15,8 +15,11 @@ const send=< Send size='20px'/>
 
 const columns = [
     { title: 'Client', dataIndex: 'client', key: 'client',  },
-    { title: 'Transaction ', dataIndex: 'number', key: 'number ',  responsive: ['sm'] },
-    { title: ' Date ', dataIndex: 'date', key: 'date',  responsive: ['md'] },
+    { title: 'Transaction ', dataIndex: 'number', key: 'number ',  sortOrder: 'descend',
+     responsive: ['sm'] },
+    { title: ' Date ', dataIndex: 'date', key: 'date',  
+    sortOrder: 'descend',
+    responsive: ['md'] },
      
     { title: 'Amount', dataIndex: 'amount', key: 'amount', 
     defaultSortOrder:'descend',
@@ -135,14 +138,8 @@ const Billing =({profiles})=> {
    
     );
     }
-
-
-
  
 export default Billing;
-
-
-
 
 export const getStaticProps = async()=>{
     const res= await fetch('https://jsonplaceholder.typicode.com/users?_limit=3')

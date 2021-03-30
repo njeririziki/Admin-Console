@@ -1,10 +1,11 @@
-import { Space, Card,Progress,Badge,Typography} from 'antd'
+import { Space, Card,Progress,Badge,Typography,Grid} from 'antd'
 import {CircularProgressbar, buildStyles} from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 
 
 const Summary = ({percent,color,number,title})=> (
+  
   <div style={{display:'flex', flexDirection:'row', justifyContent:'space-around' }}>
 
 <Typography.Title level={5}  style={{display:'flex', flexDirection:'row',}}>
@@ -17,30 +18,31 @@ const Summary = ({percent,color,number,title})=> (
 </div>
 )
 
-const Retainership = ({totals}) => {
+const Retainership = ({totals,retainershipPercent}) => {
+  const screens = Grid.useBreakpoint()
     return ( 
         <div 
         style={{backgroundColor:'white' ,display:'flex', flexDirection:"column",
         padding:'1em 1em 1em 1em'}} >
           <Typography.Title level={4}
           style={{padding:'1em 0em 0em 2em'}}> Retention Rate</Typography.Title> 
-         <div style={ {width:'250px', 
-           height:'250px', alignSelf:'center', marginBottom:'0px'}}>
+         <div style={ screens.xs? {width:'250px',height:'250px', alignSelf:'center', marginBottom:'0px'}
+         : {width:'150px',height:'150px', alignSelf:'center', marginBottom:'0px'}}>
              
               <CircularProgressbar
        circleRatio= {0.6}
        value = { 70}
-       text={'70 %'}
+       text={retainershipPercent}
        strokeWidth={5}
        styles ={ buildStyles({
            
            rotation: 1/2 + 1/5,
-           textSize:'18px',
+           textSize:'15px',
            strokeLinecap:'butt',
            pathTransitionDuration: 0.5,
-           pathColor: '#ffab91',
+           pathColor: '#00c853',
            trailColor: '#efebe9',
-           textColor: '#c63f17',
+           textColor: '#000000',
        })
        }/>  
            </div> 

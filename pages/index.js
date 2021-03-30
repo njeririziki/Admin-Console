@@ -30,6 +30,13 @@ const totals=[
    {title: 'New Clients', number:34,icon: userPlus,color:'#4dd0e1', percent:'12'}, 
    {title: 'Accounts ', number: 134,icon: users ,color:'#ff7043', percent:'8'}, 
 ]
+const retention=[
+  
+   {title:'Total Accounts ', number: 134,color:'#00c853', percent:'50'},
+   {title: ' New Accounts ', number: 94,  color:'#e91e63', percent:'38'},
+   {title: 'Disabled Accounts', number:34,color:'#4dd0e1', percent:'12'}, 
+  
+]
 const data =[
    { issue: 'Authentication',
      description:' Sales people  ',
@@ -59,7 +66,7 @@ const Dashboard =({profiles})=>{
      <div className={styles.root}>
         <div>
        
-        <Retention  totals={totals}/>
+        <Retention  totals={retention}  retainershipPercent='50.67 %'/>
        <CalenderCards />
         </div>
       
