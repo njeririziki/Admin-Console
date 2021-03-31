@@ -1,6 +1,5 @@
 import React from 'react';
-import {Tag, Space, Divider} from 'antd'
-import Layout from '@/components/Layout'
+import {Tag, Space, Divider} from 'antd';
 import Table from '@/components/tables/Expandable'
 import List from '@/components/List/List'
 import GridList from '@/components/Cards/Grid'

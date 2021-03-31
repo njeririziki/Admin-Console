@@ -77,8 +77,6 @@ const Dashboard =({profiles})=>{
 
 }
 
-
-
 export default Dashboard;
 
 export const getStaticProps = async()=>{

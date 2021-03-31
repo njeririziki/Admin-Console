@@ -4,30 +4,37 @@ import 'react-circular-progressbar/dist/styles.css';
 
 
 
-const Summary = ({percent,color,number,title})=> (
-  
-  <div style={{display:'flex', flexDirection:'row', justifyContent:'space-around' }}>
+const Summary = ({percent,color,number,title})=> {
+  const screens = Grid.useBreakpoint()
+  return (
+    <div style={ screens.xs? {display:'flex', flexDirection:'column', padding:'1em 1em 1em 1em' }
+    :{display:'flex', flexDirection:'row', justifyContent:'space-around' }}>
 
-<Typography.Title level={5}  style={{display:'flex', flexDirection:'row',}}>
+<Typography.Title level={5} >
 <Badge color={color}/> 
-  {title} </Typography.Title>
-<Typography.Text>{number}</Typography.Text>
-  <div style={{width:'350px'}}>
+  {title}   - {number}
+  </Typography.Title>
+
+  <div style={screens.xs?{width:'250px'}: {width:'350px'}}>
    <Progress  percent={percent} strokeColor={color} />
     </div>
 </div>
 )
+}
+ 
+
 
 const Retainership = ({totals,retainershipPercent}) => {
   const screens = Grid.useBreakpoint()
     return ( 
         <div 
-        style={{backgroundColor:'white' ,display:'flex', flexDirection:"column",
+        style={ screens.xs? {backgroundColor:'white' ,display:'flex', flexDirection:"column", width:'330px'}
+        :{backgroundColor:'white' ,display:'flex', flexDirection:"column",
         padding:'1em 1em 1em 1em'}} >
           <Typography.Title level={4}
           style={{padding:'1em 0em 0em 2em'}}> Retention Rate</Typography.Title> 
-         <div style={ screens.xs? {width:'250px',height:'250px', alignSelf:'center', marginBottom:'0px'}
-         : {width:'150px',height:'150px', alignSelf:'center', marginBottom:'0px'}}>
+         <div style={ screens.xs? {width:'150px',height:'150px', alignSelf:'center', marginBottom:'0px'}
+          :{width:'250px',height:'250px', alignSelf:'center', marginBottom:'0px'}}>
              
               <CircularProgressbar
        circleRatio= {0.6}
