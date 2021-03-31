@@ -1,19 +1,32 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Grid,Table} from 'antd';
+
 
  
 
  const NestedTable =({columns,data}) => {
     const screens = Grid.useBreakpoint()
+    const [expandedRow, setExpandedRow] = useState()
+    const onExpand=(expanded,record)=>{
+      console.log('it rendered before')
+      let keys=[]
+      if(expanded){
+        keys.push(record.key);
+        setExpandedRow(keys);
+        console.log('it rendered onExpand')
+      }
+      console.log('it rendered after')
+    }
     return (
       <Table
-        style={{backgroundColor:''}}
+         //style={{backgroundColor:''}}
         columns={columns}
-        key={data.number}
-        expandRowByClick={true}
-        expandable={{
-          expandedRowRender:  screens.xs? (item=> 
-          <pre key={item.number}> {item.location? <p>Location:{item.location}</p>: null}<br/>
+        expandedRowKeys={expandedRow}
+        onExpand={()=>onExpand}
+        expandable={{   
+         expandedRowRender:  screens.xs? (item=> 
+          <pre key={item.key}> 
+           {item.location? <p>Location:{item.location}</p>: null}<br/>
            Client ID : {item.client}<br/>
            {item.number? <p> Invoice Number:{item.number}</p>: null}
            Date: {item.date}

@@ -3,22 +3,15 @@ import { Button, Modal, Form, Input, Upload, InputNumber, message,Select } from 
 import { LoadingOutlined,UploadOutlined } from '@ant-design/icons';
 import {checker} from '@/utils/parsingCsv'
 import axios from '@/utils/Api'
+import {susbcriptions} from '@/utils/constants'
 
-const status=[
-  {value:1, label:'Bugs'},
-  {value:2, label:'Billing issues'},
-  {value:3, label:'Feature requests'},
-  {value:4, label:'Network Issues'},
-  ]
   const {Option}= Select
   const options=(arr)=>(
-  arr.map(option=><Option key={option.value} value={option.value}>{option.label}</Option>)
+  arr.map(option=><Option key={option.id} value={option.id}>{option.name}</Option>)
   )
 
 const categories= 'Table,Breakdown,Secondary_Breakdown,Year,Value,Unit'
-const customers = 'customer_name, contact_person, phone_number, customer_group_id'
-const vendors = 'vendor_name, contact_person, phone_number, email_address, notes'
-const products= 'product_name, cost, price, product_group_id, tax_class_id, expense_group_id, uom_id, allow_sale, allow_purchase,product_nature, product_type, alert_quantity'
+
 const OnboardingForm = ({ visible, onFinish, onCancel }) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false)
@@ -148,7 +141,7 @@ const OnboardingForm = ({ visible, onFinish, onCancel }) => {
         name="Subscription"
       >
        <Select placeholder='Trial'>
-            {options(status)}
+            {options(susbcriptions)}
           </Select>
       </Form.Item>
       <Form.Item name="products" label=" Products List" >

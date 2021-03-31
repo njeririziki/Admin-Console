@@ -1,27 +1,39 @@
 import React, { useState } from 'react';
 import { Button, Modal, Form, Input, Radio, DatePicker,message,Select } from 'antd';
 import axios from '@/utils/Api'
+import {employees, IssueCategories} from '@/utils/constants'
 
 
 const { Option } = Select;
-const customers=[
-  {value:13456, label:'Wendy'},
-  {value:2522, label:'Kelly'},
-  {value:33454, label:'John'},
-  {value:43452, label:'Chris'}, 
-]
-const categories=[
-{value:1, label:'Bugs'},
-{value:2, label:'Billing issues'},
-{value:3, label:'Feature requests'},
-{value:4, label:'Network Issues'},
-]
+
 const options=(arr)=>(
-arr.map(option=><Option key={option.value} value={option.value}>{option.label}</Option>)
+arr.map(option=><Option key={option.id} value={option.id}>{option.name}</Option>)
 )
 
-const IssuesForm = ({ visible, onFinish, onCancel }) => {
+const IssuesForm = ({ visible, onCancel }) => {
   const [form] = Form.useForm();
+  const onFinish = async(values) => {
+    console.log('Received values of form: ', values);
+
+    const payload = {
+      ...values, 
+      date_raised: values.date_raised.format('YYYY-MM-DD'),
+      due_date: values.due_date.format('YYYY-MM-DD')
+    }
+
+    try{
+       await axios.post('/ticket', payload)
+      .then(res=>{
+        console.log(res)
+      
+        if(res.status===200){
+          message.success('Successfully submitted an issue')
+      }
+      }).catch(error=> console.log(` Error encountered ${error}`) )  
+    } catch(error){
+      message.error(`This ${error} occured when poasting an issue`)
+    }
+  };
   return (
     <Modal
       visible={visible}
@@ -77,7 +89,7 @@ const IssuesForm = ({ visible, onFinish, onCancel }) => {
           ]}
         >
           <Select placeholder='Bugs'>
-            {options(categories)}
+            {options(IssueCategories)}
           </Select>
         </Form.Item>
         <Form.Item name="description" label="Description">
@@ -107,17 +119,28 @@ const IssuesForm = ({ visible, onFinish, onCancel }) => {
           ]}
         >
          <Select placeholder=''>
-            {options(customers)}
+            {options(employees)}
           </Select>
         </Form.Item>
-        <Form.Item name="date_raised" label="Date Raised">
+        <Form.Item name="date_raised" label="Date Raised"
+          rules={[
+            {
+              required: true,
+              message: 'Please input the date the issue was raised',
+            },
+          ]}>
          <DatePicker 
-        // showTime={false}
           showToday={true}
          />
         </Form.Item>
      
-        <Form.Item name="due_date" label="Due date">
+        <Form.Item name="due_date" label="Due date"
+          rules={[
+            {
+              required: true,
+              message: 'Please input the  date the issue is due',
+            },
+          ]}>
          <DatePicker/>
         </Form.Item>
      
@@ -133,40 +156,5 @@ const IssuesForm = ({ visible, onFinish, onCancel }) => {
   );
 };
 
-const CollectionsPage = (props) => {
-  //const [visible, setVisible] = useState(false);
 
-  const onFinish = async(values) => {
-    console.log('Received values of form: ', values);
-
-
-
-    const payload = {
-      ...values, 
-      date_rasied: values.date_raised.format('DD-MM-YYYY'),
-      date_due: values.due_date.format('DD-MM-YYYY')}
-    try{
-       await axios.post('/ticket', payload)
-      .then(res=>{
-        console.log(res)
-      
-        if(res.status===200){
-          message.success('Successfully submitted an issue')
-      }
-      }).catch(error=> console.log(` Error encountered ${error}`) )  
-    } catch(error){
-      message.error(`This ${error} occured when poasting an issue`)
-    }
-  };
-
-  return (
-    <div>
-      <IssuesForm
-        visible={props.visible}
-        onFinish={onFinish}
-        onCancel={props.onCancel}
-      />
-    </div>
-  );
-};
-export default CollectionsPage;
+export default IssuesForm;

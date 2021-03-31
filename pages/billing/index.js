@@ -1,5 +1,5 @@
-import React from 'react';
-import {Tag, Space, Divider} from 'antd';
+import React, {useState} from 'react';
+import {Tag, Space, Divider, Popconfirm} from 'antd';
 import Table from '@/components/tables/Expandable'
 import List from '@/components/List/List'
 import GridList from '@/components/Cards/Grid'
@@ -7,11 +7,14 @@ import Pie from '@/components/Cards/Pie'
 import styles from '@/styles/billing.module.scss'
 import {DollarSign,UserCheck,UserMinus,Send}  from 'react-feather'
 
+
 const dollar= <DollarSign size='20px'/>
 const userCheck= <UserCheck size='20px'/>
 const userMinus= < UserMinus size='20px'/>
 const send=< Send size='20px'/>
 
+
+   
 const columns = [
     { title: 'Client', dataIndex: 'client', key: 'client',  },
     { title: 'Transaction ', dataIndex: 'number', key: 'number ',  sortOrder: 'descend',
@@ -19,7 +22,6 @@ const columns = [
     { title: ' Date ', dataIndex: 'date', key: 'date',  
     sortOrder: 'descend',
     responsive: ['md'] },
-     
     { title: 'Amount', dataIndex: 'amount', key: 'amount', 
     defaultSortOrder:'descend',
     sorter: (a,b)=> a.amount - b.amount,
@@ -55,41 +57,47 @@ const columns = [
       {
         title: 'Action', key: 'action',
         render: (text, record) => (
-
-          <Space size="middle">
-         
-            <a>Close</a>
-          </Space>
+        <Popconfirm title='This record will not be permanently deleted 'onConfirm={()=>console.log(deleted)}>
+             <a>Close</a>
+        </Popconfirm>
+           
         ), 
       },
     
   ];
 
   const tableData =[
-    { client: 'Sheridan',
+    { key: 0,
+      client: 'Sheridan',
      number: 6788,
       date: '12/2/2021',
       amount: 12783,
       status: 'Paid',
     },
-    { client: 'Brandon',
-    number: 8765,
-    date: '17/2/2021',
-    amount: 15783,
-    status: 'Past due',
+    { 
+      key:1,
+      client: 'Brandon',
+      number: 8765,
+      date: '17/2/2021',
+      amount: 15783,
+      status: 'Past due',
     },
-    { client: 'Gerald',
-     number: 5368,
+    { 
+      key: 2,
+      client: 'Gerald',
+      number: 5368,
       date: '14/2/2021',
       amount: 32243,
       status: 'Paid',
     },
     
-    { client: 'Brandon',
-    number: 9345,
-    date: '18/2/2021',
-    amount: 45703,
-    status: 'Past due',
+    { 
+      key:3,
+      client: 'Brandon',
+      number: 9345,
+      date: '18/2/2021',
+      amount: 45703,
+      status: 'Past due',
     }]
 
 
@@ -100,7 +108,7 @@ const totals=[
     {title: ' Monthly Total', number: 134310, icon:dollar}, 
 ]
 const pieData=[
-        {
+     {
           id:'pending',
           label: 'Pending ',
           value: 20,
@@ -122,7 +130,10 @@ const pieData=[
 ]
 
 const Billing =({profiles})=> {
-    
+  const [tabledata, setTableData] = useState( tableData)
+  // const handleDelete = ()=>{
+  //   setTableData(tableData.filter(item=> item.key !== key)) 
+  // } 
     return(
         <div>
             <GridList data={totals}/>
@@ -132,7 +143,7 @@ const Billing =({profiles})=> {
             <Pie data={pieData}/> 
             </div>
             <Divider orientation='left' plain>Recent Transactions</Divider>
-            <Table data={tableData} columns={columns}  />
+            <Table data={tabledata} columns={columns}  />
         </div>
    
     );

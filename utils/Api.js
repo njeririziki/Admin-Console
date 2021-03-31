@@ -6,7 +6,7 @@ import router from 'next/router'
 // This instance is the template for axios functions to be used with the api 
 
 const instance= axios.create({
-    baseURL:'http://console-api.hasibu.africa:8080/api/',
+    baseURL:'http://api.console.hasibu.africa/api/',
     responseType:'json'
 });
 

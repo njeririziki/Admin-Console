@@ -23,13 +23,17 @@ const columns = [
   ];
 
 const data =[
-{ type: 'Software',
+{ 
+  key: 0,
+  type: 'Software',
   description:' Basic software installation',
   date: '12/2/2021',
   assignedto:'Jerry',
   location:' Nyundo Drive'
 },
-{ type: 'Hardware',
+{ 
+ key: 1,
+type: 'Hardware',
 description:' Printer configuration',
 date: '17/2/2021',
 assignedto:'Jerry',

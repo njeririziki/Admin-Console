@@ -41,21 +41,27 @@ const columns = [
   ];
 
 const data =[
-    { issue: 'Authentication',
+    {
+      key:0,
+      issue: 'Authentication',
       description:' Sales people  ',
       date: '12/2/2021',
       assignedto:'Jerry',
       client:' ASDF34685',
       priority:'High'
     },
-    { issue: 'Printing',
+    { 
+    key:1,
+    issue: 'Printing',
     description:' not printing ',
     date: '17/2/2021',
     assignedto:'Jerry',
     client:' ARTG38478',
     priority:'Medium'
     },
-    { issue: 'Onboarding',
+    { 
+     key:2,
+    issue: 'Onboarding',
     description:' importing docs ',
     date: '19/2/2021',
     assignedto:'Jerry',
