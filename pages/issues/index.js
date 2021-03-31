@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import Button from '@/components/AddButton'
+import AddButton from '@/components/AddButton'
 import {Tag, Space,Divider} from 'antd';
 import NestedTable from '@/components/tables/Expandable'
 import Issuesmodal from '@/components/Modal/IssuesForm'
@@ -76,7 +76,7 @@ const Issues = () => {
     return ( <div>
         <NestedTable data={data} columns={columns}/>,
            
-           <Button buttonName='Raise an issue' openModal={()=>setVisible(true)} />,
+           <AddButton buttonName='Raise an issue' openModal={()=>setVisible(true)} />,
            {/* <Divider dashed={true} plain > Recurring issues </Divider>, 
             <NestedTable data={data} columns={columns}/>,  */}
            <Issuesmodal visible={visible} onCancel={()=>setVisible(false)}/>

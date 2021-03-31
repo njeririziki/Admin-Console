@@ -1,5 +1,6 @@
-import React, {useEffect} from 'react';
-import Layout from '@/components/Layout'
+import React, {useEffect,useState} from 'react';
+import AddButton  from '@/components/AddButton'
+import AddClient from '@/components/Modal/AddBusiness'
 import List from '@/components/List/List'
 import realapi from '@/utils/Api'
 import axios from 'axios'
@@ -17,7 +18,7 @@ const data=[
 
 
 const Clients = () => {
-   
+    const [visible, setVisible] = useState(false)
 const [profile,setProfile]= React.useState()
     // fetching the client list .... query the db   
     useEffect(() => {
@@ -52,6 +53,8 @@ const [profile,setProfile]= React.useState()
     return ( 
         <div >
             <List header='Clients' data={profile} />
+            <AddButton  buttonName='New Client' openModal={()=>setVisible(true)}/>
+            <AddClient  visible={visible} onCancel={()=>setVisible(false)}/>
         </div>
      );
 }

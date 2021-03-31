@@ -41,7 +41,10 @@ const IssuesForm = ({ visible, onCancel }) => {
       okText="Submit"
       cancelText="Cancel"
       
-      onCancel={onCancel,form.resetFields()}
+      onCancel={()=>{
+        form.resetFields();
+        onCancel()
+      }}
       onOk={() => {
         form
           .validateFields()

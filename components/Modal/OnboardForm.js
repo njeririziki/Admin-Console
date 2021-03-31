@@ -12,10 +12,26 @@ import {susbcriptions} from '@/utils/constants'
 
 const categories= 'Table,Breakdown,Secondary_Breakdown,Year,Value,Unit'
 
-const OnboardingForm = ({ visible, onFinish, onCancel }) => {
+const OnboardingForm = ({ visible,onCancel }) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false)
+ 
+  const onFinish = async (values) => {
+    console.log('Received values of form: ', values);
 
+    try{
+      await axios.post('/business', values)
+     .then(res=>{
+       console.log(res)
+     
+       if(res.status===200){
+         message.success('Successfully submitted an issue')
+     }
+     }).catch(error=> console.log(` Error encountered ${error}`) )  
+   } catch(error){
+     message.error(`This ${error} occured when poasting an issue`)
+   }
+  };
   const parsingFile =(event)=>{
       const importedfile = event.target.files[0];
       const types=[ 'application/csv']
@@ -65,7 +81,10 @@ const OnboardingForm = ({ visible, onFinish, onCancel }) => {
       title=" Onboard Client"
       okText=" Done"
       cancelText="Cancel"
-      onCancel={onCancel,form.resetFields()}
+      onCancel={()=>{
+        form.resetFields();
+        onCancel()
+      }}
       onOk={() => {
         form
           .validateFields()
@@ -171,35 +190,5 @@ const OnboardingForm = ({ visible, onFinish, onCancel }) => {
   );
 };
 
-const OnboardForm = (props) => {
-  //const [visible, setVisible] = useState(false);
 
-  const onFinish = async (values) => {
-    console.log('Received values of form: ', values);
-
-    try{
-      await axios.post('/business', values)
-     .then(res=>{
-       console.log(res)
-     
-       if(res.status===200){
-         message.success('Successfully submitted an issue')
-     }
-     }).catch(error=> console.log(` Error encountered ${error}`) )  
-   } catch(error){
-     message.error(`This ${error} occured when poasting an issue`)
-   }
-  };
-
-  return (
-    <div>
-    
-      <OnboardingForm
-        visible={props.visible}
-        onFinish={onFinish}
-        onCancel={props.onCancel}
-      />
-    </div>
-  );
-};
-export default OnboardForm;
+export default OnboardingForm;
