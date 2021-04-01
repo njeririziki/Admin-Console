@@ -53,7 +53,7 @@ const Clients = () => {
        });
      
       setProfile(profile)
-       console.log(profile)
+    //    console.log(profile)
        return request
    }
   getData();  

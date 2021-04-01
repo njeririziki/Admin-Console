@@ -41,7 +41,7 @@ import { Grid,Table,Typography} from 'antd';
              </Typography.Text>): (item=> <p>{item.description}</p>)
         }}
         dataSource={data}
-        
+     
       />
     );
   }

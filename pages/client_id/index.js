@@ -26,7 +26,8 @@ const Client = ({}) => {
     const [profile,setProfile]= React.useState({
         avatar:'',
         name:'',
-        description:''
+        description:'',
+        photo:''
     })
     const [location,setLocation]= React.useState()
 
@@ -47,6 +48,7 @@ const Client = ({}) => {
                    description: profiles.email,
                    phone: profiles.phone,
                    avatar: profiles.picture.medium,
+                   photo:profiles.picture.large,
                    date: profiles.registered.date
                 }
             const locations= request.data.results;
@@ -67,15 +69,15 @@ const Client = ({}) => {
 
             setLocation(location)
            setProfile(details)
-            console.log(details)
-            console.log(location)
+            // console.log(details)
+            // console.log(location)
             return request
         }
      
         getData();
     }, [])
     return (
-        <div style={{display:'flex', flexDirection:'row'}}>
+        <div style={{display:'flex', flexDirection:'row',justifyContent:'space-around'}}>
            <ClientDetails details ={profile}/>
            <Table title={<Ribbon  tableTitle='Locations' buttonName='New location' openModal={()=>setVisible(true)}/>}
             data={location} columns={columns}/>

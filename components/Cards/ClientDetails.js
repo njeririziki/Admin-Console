@@ -9,6 +9,7 @@ const ClientDetails = ({details}) => {
     return (
         <div style={{ width:'400px',height:'400px'}}>
          <Card 
+         cover={<img alt='client photo' src ={details.photo}/>}
          actions={[
              <EditOutlined/>,
               <MoreHorizOutlined/>
