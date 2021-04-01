@@ -1,7 +1,9 @@
 import React, {useEffect,useState} from 'react';
 import AddButton  from '@/components/AddButton'
+import {Tag, Space, Divider, Popconfirm} from 'antd';
 import AddClient from '@/components/Modal/AddBusiness'
 import List from '@/components/List/List'
+import Table from '@/components/tables/Expandable'
 import realapi from '@/utils/Api'
 import axios from 'axios'
 
@@ -27,7 +29,7 @@ const [profile,setProfile]= React.useState()
        const request= await axios.get( 'https://randomuser.me/api/',{
            params:{
                results:10,
-               inc:'name ,email,gender,phone, picture'
+               inc:'name ,email,gender,phone, picture,id,registered'
            }
        })
       
@@ -39,6 +41,8 @@ const [profile,setProfile]= React.useState()
               email: element.email,
               phone: element.phone,
               avatar: element.picture.medium,
+              key:element.id.value,
+              date: element.registered.date
            })
            
        });
@@ -49,11 +53,68 @@ const [profile,setProfile]= React.useState()
    }
   getData();  
 },[] )
+const columns = [
+    { title: 'Client', dataIndex: 'name', key: 'name',  },
+    { title: 'Email ', dataIndex: 'email', key: 'email ', 
+     responsive: ['sm'] },
+    { title: ' Date ', dataIndex: 'date', key: 'date',  
+    sortOrder: 'descend',
+    responsive: ['md'] },
+    { title: 'Phone', dataIndex: 'phone', key: 'phone', 
+    defaultSortOrder:'descend',
+    sorter: (a,b)=> a.amount - b.amount,
+    responsive: ['sm']},
+    {
+        title: 'Subcription',
+        key: 'subcription',
+        dataIndex: 'subcription',
+        render: (tag,color)=> {
+              if (tag === 'Trial') {
+                color = 'volcano';
+              } 
+              if(tag === 'Premium'){ 
+                  color ='green'}
+              return (
+                <Tag color={color} key={tag}>
+                  {tag}
+                </Tag>
+              );
+            }
+         
+       , responsive: ['md'],
+       filters: [
+        {
+          text: 'Trial',
+          value: 'Trial',
+        },
+        {
+          text: 'Premium',
+          value: 'Premium',
+        },
+      ],
+      onFilter: (value, record) => record.status.indexOf(value) === 0,
+      },
+      {
+        title: 'Action', key: 'action',
+        render: (text, record) => (
+        <Popconfirm title='This record will not be permanently deleted 'onConfirm={()=>console.log(deleted)}>
+             <a>Manage</a>
+        </Popconfirm>
+           
+        ), 
+      },
     
+  ];
     return ( 
         <div >
-            <List header='Clients' data={profile} />
-            <AddButton  buttonName='New Client' openModal={()=>setVisible(true)}/>
+            
+            <List 
+         header= {<AddButton  tableTitle='Client List' buttonName='New Client' openModal={()=>setVisible(true)}/>}
+            data={profile} />
+            <Divider/>
+            <Table title={<AddButton  tableTitle='Client List' buttonName='New Client' openModal={()=>setVisible(true)}/>}
+            data={profile} columns={columns}/>
+     
             <AddClient  visible={visible} onCancel={()=>setVisible(false)}/>
         </div>
      );

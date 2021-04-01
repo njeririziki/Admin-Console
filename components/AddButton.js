@@ -1,17 +1,25 @@
 import React from 'react';
-import {Button} from 'antd'
+import {Typography,Button} from 'antd'
 import {Plus} from 'react-feather'
-import {PlusOneOutlined} from '@material-ui/icons'
+import {Plu} from '@material-ui/icons'
 
-const AddButton = (props) => {
+const AddButton = ({openModal,buttonName,tableTitle}) => {
     return ( 
+        <div style={{  display:'flex',justifyContent:'space-between'}}>
+         <Typography.Title level={5}>
+             {tableTitle}
+             </Typography.Title>   
         <Button
-        style={{ display:'flex', justifyContent:'space-around ', width: '200px',  }}
-        type='dashed '
-        onClick={props.openModal}
-        icon={<Plus/>}>
-         {props.buttonName}
+        style={{ alignSelf:'flex-end',backgroundColor:'#000000',color:'#ffffff' }}
+        
+        type='default'
+        onClick={openModal}
+       // icon={<Plus size={'1em'}/>}
+       >
+         {buttonName}
         </Button>
+        </div>
+       
      );
 }
  

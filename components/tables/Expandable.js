@@ -1,10 +1,10 @@
 import React,{useState} from 'react'
-import { Grid,Table} from 'antd';
+import { Grid,Table,Typography} from 'antd';
 
 
  
 
- const NestedTable =({columns,data}) => {
+ const NestedTable =({columns,data,title}) => {
     const screens = Grid.useBreakpoint()
     const [expandedRow, setExpandedRow] = useState()
     const onExpand=(expanded,record)=>{
@@ -23,17 +23,22 @@ import { Grid,Table} from 'antd';
         columns={columns}
         expandedRowKeys={expandedRow}
         onExpand={()=>onExpand}
+        title={()=> title}
         expandable={{   
          expandedRowRender:  screens.xs? (item=> 
-          <pre key={item.key}> 
-           {item.location? <p>Location:{item.location}</p>: null}<br/>
-           Client ID : {item.client}<br/>
-           {item.number? <p> Invoice Number:{item.number}</p>: null}
-           Date: {item.date}
+          <Typography.Text key={item.key}> 
+           {item.location? <p>Location:{item.location}</p>: null}
+          Account : {item.client}
+           {item.name? <p> Name: {item.name}</p>: null}
+           {item.phone? <p> Phone: {item.phone}</p>: null}
+           {item.email? <p> Email: {item.email}</p>: null}
+           {item.number? <p> Invoice Number: {item.number}</p>: null}
+           {item.date? <p>Date: {item.date}</p>: ''}
            {item.amount? <p>Amount:{item.amount}</p>: null}
+            {item.status? <p>Status: {item.status}</p>: ''}
            {item.description? <p> Description: {item.description}</p>:''}
-           {item.status? <p>Status: {item.status}</p>: ''}
-             </pre>): (item=> <p>{item.description}</p>)
+          
+             </Typography.Text>): (item=> <p>{item.description}</p>)
         }}
         dataSource={data}
         

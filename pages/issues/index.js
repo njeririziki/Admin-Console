@@ -74,9 +74,10 @@ const Issues = () => {
    const [visible, setVisible] = useState(false)
 
     return ( <div>
-        <NestedTable data={data} columns={columns}/>,
+          <AddButton buttonName='Raise an issue' openModal={()=>setVisible(true)} />,
+            <NestedTable data={data} columns={columns}/>,
            
-           <AddButton buttonName='Raise an issue' openModal={()=>setVisible(true)} />,
+         
            {/* <Divider dashed={true} plain > Recurring issues </Divider>, 
             <NestedTable data={data} columns={columns}/>,  */}
            <Issuesmodal visible={visible} onCancel={()=>setVisible(false)}/>
