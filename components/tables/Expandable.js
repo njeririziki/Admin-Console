@@ -35,10 +35,9 @@ import { Grid,Table,Typography} from 'antd';
            {item.number? <p> Invoice Number: {item.number}</p>: null}
            {item.date? <p>Date: {item.date}</p>: ''}
            {item.amount? <p>Amount:{item.amount}</p>: null}
-            {item.status? <p>Status: {item.status}</p>: ''}
+           {item.status? <p>Status: {item.status}</p>: ''}
            {item.description? <p> Description: {item.description}</p>:''}
-          
-             </Typography.Text>): (item=> <p>{item.description}</p>)
+          </Typography.Text>): (item=> <p>{item.description}</p>)
         }}
         dataSource={data}
      

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import AddButton from '@/components/AddButton'
+import Ribbon from '@/components/Ribbon'
 import {Tag, Space,Divider} from 'antd';
 import NestedTable from '@/components/tables/Expandable'
 import Issuesmodal from '@/components/Modal/IssuesForm'
@@ -74,8 +74,9 @@ const Issues = () => {
    const [visible, setVisible] = useState(false)
 
     return ( <div>
-          <AddButton buttonName='Raise an issue' openModal={()=>setVisible(true)} />,
-            <NestedTable data={data} columns={columns}/>,
+        
+            <NestedTable title={<Ribbon tableTitle='Issues' buttonName='Raise an issue' openModal={()=>setVisible(true)} />}
+            data={data} columns={columns}/>,
            
          
            {/* <Divider dashed={true} plain > Recurring issues </Divider>, 

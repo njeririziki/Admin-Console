@@ -5,7 +5,7 @@ import {Plus} from 'react-feather'
 
 const Ribbon = ({openModal,buttonName,tableTitle}) => {
     return ( 
-        <div style={{  display:'flex',justifyContent:'space-between'}}>
+        <div style={{  display:'flex',justifyContent:'space-between',paddingLeft:' 2em '}}>
          <Typography.Title level={5}>
              {tableTitle}
              </Typography.Title>   

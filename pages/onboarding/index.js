@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Layout from '@/components/Layout'
 import {Space} from 'antd'
 import NestedTable from '@/components/tables/Expandable'
-import Button from '@/components/AddButton'
+import Ribbon from '@/components/Ribbon'
 import OnboardForm from '@/components/Modal/OnboardForm'
 
 const columns = [
@@ -49,9 +49,10 @@ const Onboarding = () => {
   const [visible, setVisible] = useState(false)
     return ( 
     <div>
-       <NestedTable data={data} columns={columns} />,
+       <NestedTable data={data} columns={columns} 
+       title={<Ribbon  tableTitle='Client List' buttonName='New Client' openModal={()=>setVisible(true)}/>}/>,
           
-            <Button buttonName='Onboard Client' openModal={()=>setVisible(true)} />,
+         
             <OnboardForm visible={visible} onCancel={()=>setVisible(false)}/> 
       
     </div> );

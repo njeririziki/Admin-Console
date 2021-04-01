@@ -1,5 +1,5 @@
 import React, {useEffect}from 'react'
-import {Card,Avatar} from 'antd'
+import {Card,Avatar,Typography} from 'antd'
 import {EditOutlined,MoreHorizOutlined} from '@material-ui/icons'
 
 
@@ -9,16 +9,21 @@ const ClientDetails = ({details}) => {
     return (
         <div style={{ width:'400px',height:'400px'}}>
          <Card 
-         cover={<img alt='client photo' src ={details.photo}/>}
+          style={{  display:'flex',
+            justifyContent:'center'}}
+         //cover={<img alt='client photo' src ={details.photo}/>}
          actions={[
              <EditOutlined/>,
               <MoreHorizOutlined/>
          ]}>
-         <Meta
-         avatar={<Avatar src={details.avatar}/>}
-         title={details.name}
-         description={details.description}
-         />
+         <Avatar style={{ width:'200px',height:'200px'}}
+         src={details.photo}/>
+         <Typography.Title level={4}>
+         {details.name}
+         </Typography.Title>
+         <Typography.Text>
+         {details.description}
+         </Typography.Text>
           
         </Card>   
         </div>
