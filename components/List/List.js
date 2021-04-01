@@ -7,14 +7,14 @@ import Avatar from '@material-ui/core/Avatar'
 const PaymentsDueList = ({data,date,header,actions}) => {
     return ( <div>
         <Card > 
-            <List
+         <List
         header={header}
         dataSource ={data}
-       // rowKey={}
+       // rowKey={data[0].key}
        // pagination={{pageSize:props.pageSize}}
         renderItem={item=> (
-        <List.Item key={item.id}
-        actions={[<Link href='/client_id' as={`/client_${item.id}`}>
+        <List.Item key={item.key}
+        actions={[<Link href='/client_id' as={`/client_${item.key}`}>
         <a>Manage</a>
         </Link>   ]}>
             <List.Item.Meta 

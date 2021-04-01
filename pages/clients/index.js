@@ -1,5 +1,5 @@
 import React, {useEffect,useState} from 'react';
-import AddButton  from '@/components/AddButton'
+import Ribbon  from '@/components/Ribbon'
 import Link from 'next/link'
 import {Tag, Space, Divider, Popconfirm} from 'antd';
 import AddClient from '@/components/Modal/AddBusiness'
@@ -33,7 +33,7 @@ const Clients = () => {
        const request= await axios.get( 'https://randomuser.me/api/',{
            params:{
                results:10,
-               inc:'name ,email,gender,phone, picture,cell,registered'
+               inc:'name ,email,gender,phone, picture,cell,id,registered,login'
            }
        })
       
@@ -41,12 +41,13 @@ const Clients = () => {
         
        profiles.forEach(element => {
            profile.push({
+              key: element.login.uuid,
               name: `${element.name.first} ${element.name.last}`,
               email: element.email,
               phone: element.phone,
               avatar: element.picture.medium,
-              key:element.cell,
               date: element.registered.date
+
            })
            
        });
@@ -117,10 +118,10 @@ const columns = [
         <div >
             
             <List 
-         header= {<AddButton  tableTitle='Client List' buttonName='New Client' openModal={()=>setVisible(true)}/>}
+         header= {<Ribbon  tableTitle='Client List' buttonName='New Client' openModal={()=>setVisible(true)}/>}
             data={profile} />
             <Divider/>
-            <Table title={<AddButton  tableTitle='Client List' buttonName='New Client' openModal={()=>setVisible(true)}/>}
+            <Table title={<Ribbon  tableTitle='Client List' buttonName='New Client' openModal={()=>setVisible(true)}/>}
             data={profile} columns={columns}/>
      
             <AddClient  visible={visible} onCancel={()=>setVisible(false)}/>

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Tag, Space, Divider, Popconfirm} from 'antd';
 import Table from '@/components/tables/Expandable'
 import List from '@/components/List/List'
+import Link from 'next/link'
 import GridList from '@/components/Cards/Grid'
 import Pie from '@/components/Cards/Pie'
 import styles from '@/styles/billing.module.scss'
@@ -57,11 +58,11 @@ const columns = [
       {
         title: 'Action', key: 'action',
         render: (text, record) => (
-        <Popconfirm title='This record will not be permanently deleted 'onConfirm={()=>console.log(deleted)}>
-             <a>Close</a>
-        </Popconfirm>
-           
-        ), 
+          <Link href='/client_id' as={`/client_${record.key}`}>
+          <a>Manage</a>
+          </Link>   
+          ), 
+
       },
     
   ];
