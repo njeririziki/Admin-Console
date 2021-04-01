@@ -1,11 +1,13 @@
 import React, {useEffect,useState} from 'react';
 import AddButton  from '@/components/AddButton'
+import Link from 'next/link'
 import {Tag, Space, Divider, Popconfirm} from 'antd';
 import AddClient from '@/components/Modal/AddBusiness'
 import List from '@/components/List/List'
 import Table from '@/components/tables/Expandable'
 import realapi from '@/utils/Api'
 import axios from 'axios'
+import {useRouter} from 'next/router'
 
 const data=[
     { id:'33462',  name:'Teaji Ltd'},
@@ -20,8 +22,10 @@ const data=[
 
 
 const Clients = () => {
+    const router = useRouter()
     const [visible, setVisible] = useState(false)
-const [profile,setProfile]= React.useState()
+    const [selectedRow, setSelectedRow] = useState()
+    const [profile,setProfile]= React.useState()
     // fetching the client list .... query the db   
     useEffect(() => {
      let profile =[]
@@ -29,7 +33,7 @@ const [profile,setProfile]= React.useState()
        const request= await axios.get( 'https://randomuser.me/api/',{
            params:{
                results:10,
-               inc:'name ,email,gender,phone, picture,id,registered'
+               inc:'name ,email,gender,phone, picture,cell,registered'
            }
        })
       
@@ -41,14 +45,14 @@ const [profile,setProfile]= React.useState()
               email: element.email,
               phone: element.phone,
               avatar: element.picture.medium,
-              key:element.id.value,
+              key:element.cell,
               date: element.registered.date
            })
            
        });
      
       setProfile(profile)
-       
+       console.log(profile)
        return request
    }
   getData();  
@@ -97,14 +101,18 @@ const columns = [
       {
         title: 'Action', key: 'action',
         render: (text, record) => (
-        <Popconfirm title='This record will not be permanently deleted 'onConfirm={()=>console.log(deleted)}>
-             <a>Manage</a>
-        </Popconfirm>
-           
+        <Link href='/client_id' as={`/client_${record.key}`}>
+        <a>Manage</a>
+        </Link>   
         ), 
       },
     
   ];
+//   const onManage=( key)=>{
+//     console.log('trying to manage')
+  
+//   }
+
     return ( 
         <div >
             

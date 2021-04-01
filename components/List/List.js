@@ -1,7 +1,7 @@
 import React from 'react';
 import { List, Card, Typography, Divider } from 'antd'
-
- import Avatar from '@material-ui/core/Avatar'
+import Link from 'next/link'
+import Avatar from '@material-ui/core/Avatar'
 
  
 const PaymentsDueList = ({data,date,header,actions}) => {
@@ -13,8 +13,10 @@ const PaymentsDueList = ({data,date,header,actions}) => {
        // rowKey={}
        // pagination={{pageSize:props.pageSize}}
         renderItem={item=> (
-        <List.Item key={item.key}
-        actions={[<a>Manage</a>,<a>Close</a>]}>
+        <List.Item key={item.id}
+        actions={[<Link href='/client_id' as={`/client_${item.id}`}>
+        <a>Manage</a>
+        </Link>   ]}>
             <List.Item.Meta 
            avatar={<Avatar src={item.avatar}/>}
             title={item.name}
