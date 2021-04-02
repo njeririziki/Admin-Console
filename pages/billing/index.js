@@ -104,14 +104,14 @@ const columns = [
 
 const totals=[
     {title:'Sent Invoices', number: 134, icon:send, },
-    {title: 'Credited', number: 234, icon:userMinus},
-    {title: 'Paid Acc', number:34, icon:userCheck}, 
-    {title: ' Monthly Total', number: 134310, icon:dollar}, 
+    {title: 'Invoices Due', number: 234, icon:userMinus},
+    {title: 'Paid Accounts', number:34, icon:userCheck}, 
+    {title: ' Amount Billed', number: 134310, icon:dollar}, 
 ]
 const pieData=[
      {
-          id:'pending',
-          label: 'Pending ',
+          id:'unrealised',
+          label: 'Unrealised ',
           value: 20,
           color: '#ff5252'
       },
@@ -140,7 +140,7 @@ const Billing =({profiles})=> {
             <GridList data={totals}/>
             <div className={styles.rowTwo} >
             <List header='Open Invoices' data={profiles}
-             date='12/09/2021' />
+             date='12/09/2021' pageSize={3}/>
             <Pie data={pieData}/> 
             </div>
             <Divider orientation='left' plain>Recent Transactions</Divider>

@@ -1,10 +1,12 @@
-import React , {useEffect} from 'react'
+import React , {useEffect,useState} from 'react'
 import ClientDetails from '@/components/Cards/ClientDetails'
+import AddBusiness from '@/components/Modal/AddBusiness'
 import Table from '@/components/tables/Expandable'
 import Ribbon  from '@/components/Ribbon'
 import List from '@/components/List/List'
 import axios from 'axios'
-
+import { useRouter } from "next/router";
+import styles from '@/styles/clientid.module.scss'
 // const details={
 //     name:'Bazuu Wdadu',
 //     description:'LPG distributor'
@@ -23,6 +25,9 @@ const columns = [
 ]
 
 const Client = ({}) => {
+    const router = useRouter();
+    const {id} = router.query
+    const [visible,setVisible] = useState(false)
     const [profile,setProfile]= React.useState({
         avatar:'',
         name:'',
@@ -60,7 +65,6 @@ const Client = ({}) => {
                    state: element.location.state,
                    postcode: element.location.postcode,
                    
-     
                 })
                 
             }
@@ -77,11 +81,13 @@ const Client = ({}) => {
         getData();
     }, [])
     return (
-        <div style={{display:'flex', flexDirection:'row',justifyContent:'space-around'}}>
-           <ClientDetails details ={profile}/>
+        <div //style={{display:'flex', flexDirection:'row',justifyContent:'space-around'}}
+        className={styles.root} >
+           <ClientDetails details ={profile} id={id}/>
            <Table title={<Ribbon  tableTitle='Locations' buttonName='New location' openModal={()=>setVisible(true)}/>}
-            data={location} columns={columns}/>
-         
+            data={location} columns={columns}
+            pageSize={5}/>
+           <AddBusiness  visible={visible} onCancel={()=>setVisible(false)}/>
         </div>
     )
 }

@@ -4,7 +4,7 @@ import { Grid,Table,Typography} from 'antd';
 
  
 
- const NestedTable =({columns,data,title}) => {
+ const NestedTable =({columns,data,title,pageSize}) => {
     const screens = Grid.useBreakpoint()
     const [expandedRow, setExpandedRow] = useState()
     const onExpand=(expanded,record)=>{
@@ -40,7 +40,7 @@ import { Grid,Table,Typography} from 'antd';
           </Typography.Text>): (item=> <p>{item.description}</p>)
         }}
         dataSource={data}
-     
+        pagination={{pageSize:pageSize}}
       />
     );
   }

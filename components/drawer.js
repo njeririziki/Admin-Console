@@ -56,6 +56,11 @@ const MenuComponent = ({setVisible}) => {
           Billing 
           </ActiveLink>
           </Menu.Item>
+          <Menu.Item key={5} 
+           icon={<Users size={16}/>}> 
+          <ActiveLink href={'/clients'} >
+           Clients 
+           </ActiveLink> </Menu.Item>
           <Menu.Item key={3} icon={<Tool size={16}/>}>
           <ActiveLink href={'/issues'}> 
           Issues 
@@ -66,11 +71,7 @@ const MenuComponent = ({setVisible}) => {
            Onboarding 
             </ActiveLink>
          </Menu.Item>
-          <Menu.Item key={5} 
-           icon={<Users size={16}/>}> 
-          <ActiveLink href={'/clients'} >
-           Clients 
-            </ActiveLink> </Menu.Item>
+       
           <Menu.Item key={6} icon={<Settings size={16}/>}>
           <ActiveLink href={'/settings'} >
            Settings 

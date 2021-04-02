@@ -4,6 +4,7 @@ import { ChevronLeft} from 'react-feather';
 import{ MenuOutlined } from '@material-ui/icons'
 import styles from '../styles/layout.module.scss'
 import Menu from '@/components/drawer'
+import { useRouter } from "next/router";
 
 const { Header, Content, Sider } = Layout;
 
@@ -11,6 +12,8 @@ const { Header, Content, Sider } = Layout;
 // This is the layout of all pages ....rendered only when  a user is authenticated
 const Authenticated = (props) => {
     const screen = Grid.useBreakpoint()
+   // const router = useRouter();
+    //const {pagetitle} = router.query
     const [collapse,setCollapse] = useState(true );
     const [visible,setVisible] = useState(false );
 
@@ -49,7 +52,8 @@ const Authenticated = (props) => {
             }
                 <Typography.Title  style={{paddingLeft:'1.5em'}} level={5}>
                 {// implemented optionally
-                props.title || ''}
+                props.title || ''
+                }
                 </Typography.Title>
 
             </Header>

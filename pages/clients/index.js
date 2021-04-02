@@ -119,6 +119,7 @@ const columns = [
             
             <List 
          header= {<Ribbon  tableTitle='Client List' buttonName='New Client' openModal={()=>setVisible(true)}/>}
+         pageSize={4}
             data={profile} />
             <Divider/>
             <Table title={<Ribbon  tableTitle='Client List' buttonName='New Client' openModal={()=>setVisible(true)}/>}

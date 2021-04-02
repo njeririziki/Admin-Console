@@ -3,15 +3,15 @@ import {Typography,Button} from 'antd'
 import {Plus} from 'react-feather'
 
 
-const AddButton = ({openModal,buttonName}) => {
+const AddButton = ({openModal,buttonName,icon}) => {
     return ( 
           
         <Button
-        style={{ alignSelf:'flex-end',backgroundColor:'#000000',color:'#ffffff' }}
-        
-        type='dashed'
+        //style={{ width}}
+        size ='large'
+        type='text'
         onClick={openModal}
-        icon={<Plus size={'1em'}/>}
+        icon={icon}
        >
          {buttonName}
         </Button>
