@@ -1,9 +1,9 @@
  
  const employees=[
-    {id:13456, name:'Wendy'},
-    {id:2522, name:'Kelly'},
-    {id:33454, name:'John'},
-    {id:43452, name:'Chris'}, 
+    {id:1, name:'Wendy'},
+    {id:2, name:'Kelly'},
+    {id:3, name:'John'},
+    {id:4, name:'Chris'}, 
   ]
   const IssueCategories=[
   {id:1, name:'Bugs'},
@@ -21,7 +21,7 @@ const susbcriptions=[
 const customers = 'customer_name, contact_person, phone_number, customer_group_id';
 const vendors = 'vendor_name, contact_person, phone_number, email_address, notes';
 const products= 'product_name, cost, price, product_group_id, tax_class_id, expense_group_id,uom_id, allow_sale, allow_purchase,product_nature, product_type, alert_quantity';
-
+const testCategories= 'Table,Breakdown,Secondary_Breakdown,Year,Value,Unit'
 
 export {
     employees,
@@ -29,5 +29,6 @@ export {
     customers,
     vendors,
     products,
-    susbcriptions
+    susbcriptions,
+    testCategories
 }

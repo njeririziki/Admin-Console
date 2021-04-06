@@ -3,29 +3,24 @@ import { Button, Modal, Form, Input, Upload, InputNumber, message,Select } from 
 import { LoadingOutlined,UploadOutlined } from '@ant-design/icons';
 import {checker} from '@/utils/parsingCsv'
 import axios from '@/utils/Api'
-import {susbcriptions} from '@/utils/constants'
+import {testCategories} from '@/utils/constants'
 
-  const {Option}= Select
-  const options=(arr)=>(
-  arr.map(option=><Option key={option.id} value={option.id}>{option.name}</Option>)
-  )
 
-const categories= 'Table,Breakdown,Secondary_Breakdown,Year,Value,Unit'
 
-const OnboardingForm = ({ visible,onCancel }) => {
+
+const OnboardingForm = ({ visible,onCancel,itemslabel,modalTitle }) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false)
  
   const onFinish = async (values) => {
-    console.log('Received values of form: ', values);
-
+  //  console.log('Received values of form: ', values);
     try{
-      await axios.post('/business', values)
+      await axios.post(`/business/create_${apiEndpoint}`, values)
      .then(res=>{
        console.log(res)
      
        if(res.status===200){
-         message.success('Successfully submitted an issue')
+         message.success('Successfully imported ')
      }
      }).catch(error=> console.log(` Error encountered ${error}`) )  
    } catch(error){
@@ -42,43 +37,15 @@ const OnboardingForm = ({ visible,onCancel }) => {
       reader.readAsText(importedfile, "UTF-8");
       reader.onload = (event) => {
        const content= event.target.result;
-       checker(content,categories);
+       checker(content, testCategories);
        }
    
   }
-  // const properties = {
-  //   beforeUpload: file => {
-  //     const excelSheet= file.type !== 'application/csv'
-  //     if ( !excelSheet) {
-  //       message.error(`${file.name} is not a spreadsheet`); 
-  //       const reader = new FileReader();
-  //       reader.readAsText(file, "UTF-8");
-  //       reader.onload = (event) => {
-  //         const content = event.target.result;
-  //         checker(content, categories);
-  //       }; 
-  //     }
-    
-  //   },
-  //   onChange: info => {
-  //     if (info.file.status !== 'uploading') {
-  //       console.log(info.file, info.fileList);
-  //       setLoading(true)
-  //     }
-  //     if (info.file.status === 'done') {
-  //       message.success(`${info.file.name} file uploaded successfully`);
-  //       setLoading(false)
-  //     } else if (info.file.status === 'error') {
-  //       message.error(`${info.file.name} file upload failed.`);
-  //       setLoading(false)
-  //     }
-  //   },
-  //   showUploadList: false,
-  // };
+
   return (
     <Modal
       visible={visible}
-      title=" Onboard Client"
+      title={modalTitle}
       okText=" Done"
       cancelText="Cancel"
       onCancel={()=>{
@@ -107,83 +74,14 @@ const OnboardingForm = ({ visible,onCancel }) => {
           modifier: 'public',
         }}
       >
-        <Form.Item
-          name="business_name"
-          label="Business Name"
-          rules={[
-            {
-              required: true,
-              message: 'Please fill this field',
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          name="contact_person"
-          label="Contact Person" >
-            <Input/>
-          </Form.Item>
-        <Form.Item
-        label="phone_number"
-        name="Phone number"
-        rules={[
-          {
-            required: true,
-            message: 'Please input phone number',
-          },
-        ]}
-      >
-        <Input type='tel' />
-      </Form.Item>
-      <Form.Item
-        label="email_address"
-        name="Email address"
-        rules={[
-          {
-            required: true,
-            message: 'Please input email adress',
-          },
-        ]}
-      >
-        <Input  type='email'/>
-      </Form.Item>
-        <Form.Item
-        label="physical_address"
-        name="Location"
+     
+      <Form.Item name="products" label={itemslabel} >
       
-      >
-        <Input />
-      </Form.Item>
-      <Form.Item
-        label="business_status"
-        name="Subscription"
-      >
-       <Select placeholder='Trial'>
-            {options(susbcriptions)}
-          </Select>
-      </Form.Item>
-      <Form.Item name="products" label=" Products List" >
-         {/* <Upload {...properties}>
-         <Button icon={loading? <LoadingOutlined/>:<UploadOutlined />}>Import file</Button>
-         </Upload> */}
-        <Input type="file"
-        style={{top:0, bottom:0, visibility:'none' }}
-        prefix={loading? <LoadingOutlined/> : <UploadOutlined/>}
+        <input type="file"
+        //prefix={<UploadOutlined/>}
          onChange={ parsingFile}/>
         </Form.Item>
     
-        {/*    <Form.Item name="vendors" label=" Vendor List" >
-         <Upload {...properties}>
-         <Button icon={loading? <LoadingOutlined/> :<UploadOutlined />}>Import file</Button>
-         </Upload>
-        </Form.Item> */}
-        {/* 
-        <Form.Item name="customer" label=" Customer List" >
-        <Upload {...properties}>
-         <Button icon={loading? <LoadingOutlined/> :<UploadOutlined />}>Import file</Button>
-         </Upload>
-        </Form.Item> */}
        
       </Form>
     </Modal>

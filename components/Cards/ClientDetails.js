@@ -1,12 +1,32 @@
 import React, {useEffect,useState}from 'react'
-import {Card,Avatar,Typography,Tooltip} from 'antd'
-import {EditOutlined,MoreHorizOutlined} from '@material-ui/icons'
+import {Card,Avatar,Typography,Tooltip,Menu,Dropdown, Button} from 'antd'
+import {EditOutlined,MoreHorizOutlined, BuildOutlined, AttachFileOutlined} from '@material-ui/icons'
+import OnboardForm from '@/components/Modal/OnboardForm'
 import Issuesmodal from '@/components/Modal/IssuesForm'
 import AddButton from '@/components/AddButton'
+import SubMenu from 'antd/lib/menu/SubMenu'
 
 const {Meta}= Card
+const {Item}= Menu
+
+
 const ClientDetails = ({details,id}) => {
-    const [visible, setVisible] = useState(false)
+    const [openIssueForm, setOpenIssueForm] = useState(false)
+    const [openVendorsForm, setOpenVendorsForm] = useState(false)
+    const [openProductsForm, setOpenProductsForm] = useState(false)
+    const [openCustomersForm, setOpenCustomersForm] = useState(false)
+    const ActionMenu=(
+
+        <Menu style={{ width: 250 }}>
+            <Item onClick={()=>setOpenVendorsForm(true)}>
+                Import Vendors
+               </Item>
+            <Item onClick={()=>setOpenProductsForm(true)}> Import Products</Item>
+            <Item onClick={()=>setOpenCustomersForm(true)}>Import Customers</Item>
+          
+        </Menu>
+
+)
     return (
         <div >
          <Card 
@@ -14,11 +34,17 @@ const ClientDetails = ({details,id}) => {
          //cover={<img alt='client photo' src ={details.photo}/>}
          actions={[
             <Tooltip title="edit details">
-                    <AddButton icon={ <EditOutlined/>} openModal={()=>setVisible(true)}/>,
-            </Tooltip>,
-              <Tooltip title="raise an issue">
-                 <AddButton icon={ <MoreHorizOutlined/>}  openModal={()=>setVisible(true)}/> ,
-              </Tooltip>
+                    <AddButton icon={ <EditOutlined/>} openModal={()=>setOpenIssueForm(true)}/>,
+              </Tooltip>,
+            <Tooltip title="raise an issue">
+                 <AddButton icon={ <BuildOutlined/>}  openModal={()=>setOpenVendorsForm(true)}/> ,
+              </Tooltip>,
+            <Tooltip title="Import Products">
+              <Dropdown overlay={ActionMenu}>
+                  <MoreHorizOutlined/>
+              </Dropdown>
+              
+               </Tooltip>
               
          ]}>
          <Avatar style={{ width:'200px',height:'200px'}}
@@ -34,7 +60,16 @@ const ClientDetails = ({details,id}) => {
         
        
         </Card>   
-        <Issuesmodal visible={visible} onCancel={()=>setVisible(false)}/>
+        <Issuesmodal visible={openIssueForm} onCancel={()=>setOpenIssueForm(false)}/>
+        <OnboardForm visible={openVendorsForm} onCancel={()=>setOpenVendorsForm(false)}
+            modalTitle={'Vendors'} itemslabel={'List of vendors'}
+            apiEndpoint={`vendors`}/>
+             <OnboardForm visible={openProductsForm} onCancel={()=>setOpenProductsForm(false)}
+            modalTitle={'Products'} itemslabel={'List of Products'}
+            apiEndpoint={`products`}/>
+             <OnboardForm visible={openCustomersForm} onCancel={()=>setOpenCustomersForm(false)}
+            modalTitle={'Customers'} itemslabel={'List of Customers'}
+            apiEndpoint={`customers`}/>
         </div>
     )
 }

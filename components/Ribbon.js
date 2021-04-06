@@ -10,7 +10,7 @@ const Ribbon = ({openModal,buttonName,tableTitle}) => {
              {tableTitle}
              </Typography.Title>   
         <Button
-        style={{ alignSelf:'flex-end',backgroundColor:'#000000',color:'#ffffff' }}
+        style={{ alignSelf:'flex-end',backgroundColor:'#88c399',color:'#ffffff' }}
         
         type='default'
         onClick={openModal}

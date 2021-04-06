@@ -1,10 +1,11 @@
 import React from 'react';
-import { List, Card, Typography, Divider } from 'antd'
+import { List, Card, Typography, Divider,Grid } from 'antd'
 import Link from 'next/link'
 import Avatar from '@material-ui/core/Avatar'
 
  
 const PaymentsDueList = ({data,date,header,actions,pageSize}) => {
+
     return ( <div>
         <Card > 
          <List
@@ -14,17 +15,21 @@ const PaymentsDueList = ({data,date,header,actions,pageSize}) => {
         pagination={{pageSize:pageSize}}
         renderItem={item=> (
         <List.Item key={item.key}
-        //actions={[ ]}
+        actions={[  <Link href='/client_id' as={`/client_${item.key}`}>
+        <a>Manage</a>
+        </Link>]}
         >
             <List.Item.Meta 
            avatar={<Avatar src={item.avatar}/>}
             title={item.name}
-            description= {<p>{item.email} <br/> {item.phone}</p>}
+            description= {<p> Contact: {item.phone} <br/> {item.email}</p>}
             />
-           
-         { item.avatar? <Link href='/client_id' as={`/client_${item.key}`}>
+           {/* <div>  
+           { item.avatar? <Link href='/client_id' as={`/client_${item.key}`}>
         <a>Manage</a>
         </Link>:'' } 
+           </div>
+        */}
             </List.Item>)}
             
         /></Card>

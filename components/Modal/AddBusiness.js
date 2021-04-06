@@ -22,10 +22,9 @@ const IssuesForm = ({ visible, onCancel }) => {
     }
 
     try{
-       await axios.post('/business', payload)
+       await axios.post('/business/create_business', payload)
       .then(res=>{
         console.log(res)
-      
         if(res.status===200){
           message.success('Successfully submitted an issue')
       }

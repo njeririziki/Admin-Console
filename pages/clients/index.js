@@ -118,11 +118,11 @@ const columns = [
         <div >
             
             <List 
-         header= {<Ribbon  tableTitle='Client List' buttonName='New Client' openModal={()=>setVisible(true)}/>}
+         header= {<Ribbon  tableTitle='Client List' buttonName='Add New' openModal={()=>setVisible(true)}/>}
          pageSize={4}
             data={profile} />
             <Divider/>
-            <Table title={<Ribbon  tableTitle='Client List' buttonName='New Client' openModal={()=>setVisible(true)}/>}
+            <Table title={<Ribbon  tableTitle='Client List' buttonName='Add New' openModal={()=>setVisible(true)}/>}
             data={profile} columns={columns}/>
      
             <AddClient  visible={visible} onCancel={()=>setVisible(false)}/>

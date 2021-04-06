@@ -4,7 +4,6 @@ import AddBusiness from '@/components/Modal/AddBusiness'
 import Table from '@/components/tables/Expandable'
 import Ribbon  from '@/components/Ribbon'
 import List from '@/components/List/List'
-//import OnboardForm from '@/components/Modal/OnboardForm'
 import axios from 'axios'
 import { useRouter } from "next/router";
 import styles from '@/styles/clientid.module.scss'
@@ -89,9 +88,6 @@ const Client = ({}) => {
             data={location} columns={columns}
             pageSize={5}/>
            <AddBusiness  visible={visible} onCancel={()=>setVisible(false)}/>
-           {/* <OnboardForm visible={visible} onCancel={()=>setVisible(false)}
-            modalTitle={'Vendors'} itemslabel={'List of vendors'}
-            apiEndpoint={`vendors`}/> */}
         </div>
     )
 }

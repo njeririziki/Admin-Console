@@ -50,10 +50,11 @@ const Onboarding = () => {
     return ( 
     <div>
        <NestedTable data={data} columns={columns} 
-       title={<Ribbon  tableTitle='Client List' buttonName='New Client' openModal={()=>setVisible(true)}/>}/>,
+       title={<Ribbon  tableTitle='New Clients' buttonName='Onboard Client' openModal={()=>setVisible(true)}/>}/>,
           
-         
-            <OnboardForm visible={visible} onCancel={()=>setVisible(false)}/> 
+            <OnboardForm visible={visible} onCancel={()=>setVisible(false)}
+            modalTitle={'Vendors'} itemslabel={'List of vendors'}
+            apiEndpoint={`vendors`}/> 
       
     </div> );
 }

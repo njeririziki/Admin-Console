@@ -1,23 +1,32 @@
 const { message } = require("antd");
 
+// this function converts the document to an array
+// titles variable breaks down the first row of the document
+// rows variable breaks down the other rows of the document
+// it returns the array of values in the document
 export const convert =(categories,delimiter=',')=>{
-   
+  
   const titles= categories.slice(0, categories.indexOf('\n')).split(delimiter)
    const rows= categories.slice(categories.indexOf('\n') + 1).split('\n');
-
- return rows.map(row=>{
+   console.log(rows[0])
+   // checking if there is data in the file
+   if(rows[0].length < 2){
+    return console.log('there is no data in this file')
+     } 
+     return rows.map(row=>{
      const values = row.split(delimiter);
-     if(values[0].length== 0){
      const group=(arr)=> arr.reduce((object,curr,i)=>(   
-     object[curr]= values[i],object) ,{})
+     object[curr]= values[i],object) ,{});
+     console.log('There is data in this file')
          return group(titles)
-     }
-     return message.error(` There is no data in this file`)
+   
  })
 } 
 
-export const checker= (categories,compare)=> {
-    const titles= categories.slice(0, categories.indexOf('\n'));
+// isMatched function compares the titles with the required titles 
+// if true calls the convert function 
+export const checker= (values,compare)=> {
+    const titles= values.slice(0, values.indexOf('\n'));
 
     console.log({titles, compare});
 
@@ -29,9 +38,9 @@ export const checker= (categories,compare)=> {
          });
         }
     if(isMatched(titles,compare)){ 
-        message.success('successfully submitted')
-        const x = convert(categories);
-        console.log(x)
+        message.success('the categories match')
+        const x = convert(values);
+        console.log('converted document')
         return x;
            
     }
