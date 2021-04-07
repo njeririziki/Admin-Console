@@ -30,16 +30,15 @@ const OnboardingForm = ({ visible,onCancel,itemslabel,modalTitle }) => {
   const parsingFile =(event)=>{
       const importedfile = event.target.files[0];
       const types=[ 'application/csv']
-       if ( types.includes(importedfile.type)) {
-        return message.error(`please pick a csv file`)
-      };
-      const reader = new FileReader();
-      reader.readAsText(importedfile, "UTF-8");
-      reader.onload = (event) => {
-       const content= event.target.result;
-       checker(content, testCategories);
-       }
-   
+       if ( importedfile.type === 'application/csv') {
+        const reader = new FileReader();
+        reader.readAsText(importedfile, "UTF-8");
+        reader.onload = (event) => {
+         const content= event.target.result;
+         checker(content, testCategories);
+         }
+      } //else?
+      return message.error(`please pick a csv file`);
   }
 
   return (
