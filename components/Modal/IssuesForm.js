@@ -10,7 +10,7 @@ const options=(arr)=>(
 arr.map(option=><Option key={option.id} value={option.id}>{option.name}</Option>)
 )
 
-const IssuesForm = ({ visible, onCancel }) => {
+const IssuesForm = ({ visible, onCancel,currentBusinessId }) => {
   const [form] = Form.useForm();
   const onFinish = async(values) => {
     console.log('Received values of form: ', values);
@@ -108,7 +108,7 @@ const IssuesForm = ({ visible, onCancel }) => {
             },
           ]}
         >
-          <Input />
+          <Input value={currentBusinessId} />
     
         </Form.Item>
         <Form.Item

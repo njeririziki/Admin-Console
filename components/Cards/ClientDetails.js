@@ -18,11 +18,9 @@ const ClientDetails = ({details,id}) => {
     const ActionMenu=(
 
         <Menu style={{ width: 250 }}>
-            <Item onClick={()=>setOpenVendorsForm(true)}>
-                Import Vendors
-               </Item>
-            <Item onClick={()=>setOpenProductsForm(true)}> Import Products</Item>
-            <Item onClick={()=>setOpenCustomersForm(true)}>Import Customers</Item>
+            <Item onClick={()=>setOpenVendorsForm(true)}>   Import Vendors </Item>
+            <Item onClick={()=>setOpenProductsForm(true)}> Import Products </Item>
+            <Item onClick={()=>setOpenCustomersForm(true)}>Import Customers </Item>
           
         </Menu>
 
@@ -60,7 +58,7 @@ const ClientDetails = ({details,id}) => {
         
        
         </Card>   
-        <Issuesmodal visible={openIssueForm} onCancel={()=>setOpenIssueForm(false)}/>
+        <Issuesmodal visible={openIssueForm} onCancel={()=>setOpenIssueForm(false)} currentBusinessId={1}/>
         <OnboardForm visible={openVendorsForm} onCancel={()=>setOpenVendorsForm(false)}
             modalTitle={'Vendors'} itemslabel={'List of vendors'}
             apiEndpoint={`vendors`}/>
