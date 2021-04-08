@@ -5,6 +5,7 @@ import OnboardForm from '@/components/Modal/OnboardForm'
 import Issuesmodal from '@/components/Modal/IssuesForm'
 import AddButton from '@/components/AddButton'
 import SubMenu from 'antd/lib/menu/SubMenu'
+import {testCategories,vendors,customers,products} from '@/utils/constants'
 
 const {Meta}= Card
 const {Item}= Menu
@@ -35,7 +36,7 @@ const ClientDetails = ({details,id}) => {
                     <AddButton icon={ <EditOutlined/>} openModal={()=>setOpenIssueForm(true)}/>,
               </Tooltip>,
             <Tooltip title="raise an issue">
-                 <AddButton icon={ <BuildOutlined/>}  openModal={()=>setOpenVendorsForm(true)}/> ,
+                 <AddButton icon={ <BuildOutlined/>}  openModal={()=>setOpenIssuesForm(true)}/> ,
               </Tooltip>,
             <Tooltip title="Import Products">
               <Dropdown overlay={ActionMenu}>
@@ -58,15 +59,16 @@ const ClientDetails = ({details,id}) => {
         
        
         </Card>   
-        <Issuesmodal visible={openIssueForm} onCancel={()=>setOpenIssueForm(false)} currentBusinessId={1}/>
+        <Issuesmodal visible={openIssueForm} onCancel={()=>setOpenIssueForm(false)} 
+        currentBusinessId='4'/>
         <OnboardForm visible={openVendorsForm} onCancel={()=>setOpenVendorsForm(false)}
             modalTitle={'Vendors'} itemslabel={'List of vendors'}
-            apiEndpoint={`vendors`}/>
+            apiEndpoint={`vendors`} categories={testCategories}/>
              <OnboardForm visible={openProductsForm} onCancel={()=>setOpenProductsForm(false)}
-            modalTitle={'Products'} itemslabel={'List of Products'}
+            modalTitle={'Products'} itemslabel={'List of Products'} categories={testCategories}
             apiEndpoint={`products`}/>
              <OnboardForm visible={openCustomersForm} onCancel={()=>setOpenCustomersForm(false)}
-            modalTitle={'Customers'} itemslabel={'List of Customers'}
+            modalTitle={'Customers'} itemslabel={'List of Customers'} categories={testCategories}
             apiEndpoint={`customers`}/>
         </div>
     )

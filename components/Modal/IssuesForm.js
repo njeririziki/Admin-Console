@@ -101,14 +101,14 @@ const IssuesForm = ({ visible, onCancel,currentBusinessId }) => {
         <Form.Item
           name="business_id"
           label="Account Number"
-          rules={[
-            {
-              required: true,
-              message: 'Please input the client name',
-            },
-          ]}
+          // rules={[
+          //   {
+          //     required: true,
+          //     message: 'Please input the business id',
+          //   },
+          // ]}
         >
-          <Input value={currentBusinessId} />
+          <Input value={4} />
     
         </Form.Item>
         <Form.Item

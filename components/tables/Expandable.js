@@ -1,8 +1,8 @@
 import React,{useState} from 'react'
-import { Grid,Table,Typography} from 'antd';
+import { Grid,Table,Typography,Descriptions} from 'antd';
 
 
- 
+
 
  const NestedTable =({columns,data,title,pageSize}) => {
     const screens = Grid.useBreakpoint()
@@ -26,18 +26,22 @@ import { Grid,Table,Typography} from 'antd';
         title={()=> title}
         expandable={{   
          expandedRowRender:  screens.xs? (item=> 
-          <Typography.Text key={item.key}> 
+          <Descriptions key={item.key} title='Details' size='small'> 
            {item.location? <p>Location:{item.location}</p>: null}
-          Account : {item.client}
-           {item.name? <p> Name: {item.name}</p>: null}
-           {item.phone? <p> Phone: {item.phone}</p>: null}
-           {item.email? <p> Email: {item.email}</p>: null}
-           {item.number? <p> Invoice Number: {item.number}</p>: null}
-           {item.date? <p>Date: {item.date}</p>: ''}
-           {item.amount? <p>Amount:{item.amount}</p>: null}
-           {item.status? <p>Status: {item.status}</p>: ''}
-           {item.description? <p> Description: {item.description}</p>:''}
-          </Typography.Text>): (item=> <p>{item.description}</p>)
+           <Descriptions.Item label='Account'> {item.client}</Descriptions.Item> 
+           {item.name? <Descriptions.Item label='Name'>  {item.name}</Descriptions.Item>: null}
+           {item.phone? <Descriptions.Item label='Phone'>  {item.phone}</Descriptions.Item>: null}
+           {item.email? <Descriptions.Item label='Email'>  {item.email}</Descriptions.Item>: null}
+           {item.number? <Descriptions.Item label='Invoice Number'>  {item.number}</Descriptions.Item>: null}
+           {item.date? <Descriptions.Item label='Date '>{item.date}</Descriptions.Item>: ''}
+           {item.amount? <Descriptions.Item label='Amount'>{item.amount}</Descriptions.Item>: null}
+           {item.status? <Descriptions.Item label='Status'> {item.status}</Descriptions.Item>: ''}
+           {item.description? <Descriptions.Item label='Description '> {item.description}</Descriptions.Item>:''}
+          </Descriptions>):
+           (item=>
+            <Descriptions>
+              <Descriptions.Item label='Description '>{item.description}</Descriptions.Item>
+            </Descriptions> )
         }}
         dataSource={data}
         pagination={{pageSize:pageSize}}

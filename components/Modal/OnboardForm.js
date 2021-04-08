@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { Button, Modal, Form, Input, Upload, InputNumber, message,Select } from 'antd';
-import { LoadingOutlined,UploadOutlined } from '@ant-design/icons';
+import { Button, Modal, Form, Input, Upload, InputNumber, message,Select,Typography } from 'antd';
+import { LoadingOutlined,UploadOutlined,DownloadOutlined } from '@ant-design/icons';
 import {checker} from '@/utils/parsingCsv'
 import axios from '@/utils/Api'
-import {testCategories} from '@/utils/constants'
 
 
 
 
-const OnboardingForm = ({ visible,onCancel,itemslabel,modalTitle }) => {
+
+const OnboardingForm = ({ visible,onCancel,itemslabel,modalTitle,categories }) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false)
  
@@ -29,16 +29,20 @@ const OnboardingForm = ({ visible,onCancel,itemslabel,modalTitle }) => {
   };
   const parsingFile =(event)=>{
       const importedfile = event.target.files[0];
-      const types=[ 'application/csv']
-       if ( importedfile.type === 'application/csv') {
+     // const types=[ 'application/csv']
+     console.log(importedfile.type)
+       if ( importedfile.type !== 'application/csv') {
+        message.success(`this is a a csv file`);
         const reader = new FileReader();
         reader.readAsText(importedfile, "UTF-8");
         reader.onload = (event) => {
          const content= event.target.result;
-         checker(content, testCategories);
+         checker(content, categories);
          }
-      } //else?
-      return message.error(`please pick a csv file`);
+      } else{
+        return message.error(`please pick a csv file`);
+      }
+    
   }
 
   return (
@@ -74,15 +78,28 @@ const OnboardingForm = ({ visible,onCancel,itemslabel,modalTitle }) => {
         }}
       >
      
-      <Form.Item name="products" label={itemslabel} >
+      <Form.Item name="products" label={itemslabel}  >
+      <label style={{ display:'flex', flexDirection:'row',
+        border:'1px solid #cfd8dc',padding: '0.5em 0.5em 0.5em 1em'}}>
+        {loading? <LoadingOutlined style={{fontSize:'18px'}}/>:<UploadOutlined />}
       
-        <input type="file"
-        //prefix={<UploadOutlined/>}
-         onChange={ parsingFile}/>
-        </Form.Item>
-    
+        <Input type='file' 
+         style={{width:0,height:0,opacity:0}}
+         //accept='.csv,application/csv'
+         onChange={ parsingFile} /> 
+           Import 
+        </label>
        
+        </Form.Item> 
       </Form>
+      <div style={{display:'flex',flexDirection:'row',justifyContent:'space-around'}}>
+      <Typography>
+        Download a sample of the file : 
+      </Typography>
+      <Button icon={<DownloadOutlined/>}>Sample document</Button>
+      <Typography>.csv file</Typography>
+      </div>
+      
     </Modal>
   );
 };
