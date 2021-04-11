@@ -24,8 +24,7 @@ const IssuesForm = ({ visible, onCancel,currentBusinessId }) => {
     try{
        await axios.post('/ticket', payload)
       .then(res=>{
-        console.log(res)
-      
+   
         if(res.status===200){
           message.success('Successfully submitted an issue')
       }

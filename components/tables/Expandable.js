@@ -2,8 +2,6 @@ import React,{useState} from 'react'
 import { Grid,Table,Typography,Descriptions} from 'antd';
 
 
-
-
  const NestedTable =({columns,data,title,pageSize}) => {
     const screens = Grid.useBreakpoint()
     const [expandedRow, setExpandedRow] = useState()
@@ -32,15 +30,15 @@ import { Grid,Table,Typography,Descriptions} from 'antd';
            {item.name? <Descriptions.Item label='Name'>  {item.name}</Descriptions.Item>: null}
            {item.phone? <Descriptions.Item label='Phone'>  {item.phone}</Descriptions.Item>: null}
            {item.email? <Descriptions.Item label='Email'>  {item.email}</Descriptions.Item>: null}
-           {item.number? <Descriptions.Item label='Invoice Number'>  {item.number}</Descriptions.Item>: null}
-           {item.date? <Descriptions.Item label='Date '>{item.date}</Descriptions.Item>: ''}
+           {item.reference_number? <Descriptions.Item label='Invoice Number'>  {item.reference_number}</Descriptions.Item>: null}
+           {item.due_date? <Descriptions.Item label='Due Date '>{item.due_date}</Descriptions.Item>: ''}
            {item.amount? <Descriptions.Item label='Amount'>{item.amount}</Descriptions.Item>: null}
            {item.status? <Descriptions.Item label='Status'> {item.status}</Descriptions.Item>: ''}
            {item.description? <Descriptions.Item label='Description '> {item.description}</Descriptions.Item>:''}
           </Descriptions>):
            (item=>
             <Descriptions>
-              <Descriptions.Item label='Description '>{item.description}</Descriptions.Item>
+            <Descriptions.Item label='Description '>{item.description}</Descriptions.Item>
             </Descriptions> )
         }}
         dataSource={data}
