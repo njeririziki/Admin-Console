@@ -76,6 +76,7 @@ const OnboardingForm = ({ visible,onCancel,itemslabel,modalTitle,categories }) =
         initialValues={{
           modifier: 'public',
         }}
+        autoComplete="off"
       >
      
       <Form.Item name="products" label={itemslabel}  >

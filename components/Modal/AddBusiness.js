@@ -59,6 +59,7 @@ const IssuesForm = ({ visible, onCancel }) => {
       }}
     >
       <Form
+      autoComplete="off"
         form={form}
         layout="vertical"
         name="issesform"

@@ -37,7 +37,7 @@ import { Grid,Table,Typography,Descriptions} from 'antd';
            {item.description? <Descriptions.Item label='Description '> {item.description}</Descriptions.Item>:''}
           </Descriptions>):
            (item=>
-            <Descriptions>
+            <Descriptions title='Details' >
             <Descriptions.Item label='Description '>{item.description}</Descriptions.Item>
             </Descriptions> )
         }}

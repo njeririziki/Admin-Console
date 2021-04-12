@@ -65,6 +65,7 @@ const IssuesForm = ({ visible, onCancel,currentBusinessId }) => {
         initialValues={{
           priority: 'highpriority',
         }}
+        autoComplete="off"
        // onFinishFailed={onFinishFailed}
       >
       

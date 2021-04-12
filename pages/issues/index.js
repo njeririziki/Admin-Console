@@ -86,7 +86,7 @@ const Issues = () => {
           //console.log()
           if(res.status===200){
             //message.success('Successfully submitted an issue')
-            console.log(data);
+            //console.log(data);
             setTicket(data)
         }
       }).catch(error=> console.log(` Error encountered ${error}`) )

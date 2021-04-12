@@ -6,9 +6,42 @@ import Issuesmodal from '@/components/Modal/IssuesForm'
 import AddButton from '@/components/AddButton'
 import SubMenu from 'antd/lib/menu/SubMenu'
 import {testCategories,vendors,customers,products} from '@/utils/constants'
+const Dets=({details})=>(
+    <div>
+    <Avatar style={{ width:'200px',height:'200px'}}
+    src={details.photo}/>
+    
+    <Typography.Title level={4}>
+    {details.name}
+    </Typography.Title>
+    <Typography.Text>
+    {details.description} 
+    </Typography.Text>
+    </div>
+   
+)
+const Edit=({details})=>(
+    <div>
+ 
+    <Typography.Title level={4}>
+    {details.name} 
+    </Typography.Title>
+    <Typography.Text>
+    {details.description} 
+    </Typography.Text>
+    <Typography.Text>
+    {details.email} 
+    </Typography.Text>
+   
+    </div>
 
+)
 const {Meta}= Card
 const {Item}= Menu
+const tablist=[
+    {key:'front', tab:'front'},
+    {key:'edit', tab: 'edit'}
+]
 
 
 const ClientDetails = ({details,id}) => {
@@ -16,6 +49,7 @@ const ClientDetails = ({details,id}) => {
     const [openVendorsForm, setOpenVendorsForm] = useState(false)
     const [openProductsForm, setOpenProductsForm] = useState(false)
     const [openCustomersForm, setOpenCustomersForm] = useState(false)
+    const [key, setKey] = useState('front')
     const ActionMenu=(
 
         <Menu style={{ width: 250 }}>
@@ -24,19 +58,26 @@ const ClientDetails = ({details,id}) => {
             <Item onClick={()=>setOpenCustomersForm(true)}>Import Customers </Item>
           
         </Menu>
-
-)
+        )
+        const content={
+            front: <Dets details={details}/>,
+             edit:<Edit details={details}/>
+         }
     return (
         <div >
          <Card 
          style={{  display:'flex', flexDirection:'column', justifyContent:'center',}}
-         //cover={<img alt='client photo' src ={details.photo}/>}
+         tabList={tablist}
+      
+         activeTabKey={key}
+         //defaultActiveTabKey='details'
+         onTabChange={key=> setKey(key)}
          actions={[
             <Tooltip title="edit details">
                     <AddButton icon={ <EditOutlined/>} openModal={()=>setOpenIssueForm(true)}/>,
               </Tooltip>,
             <Tooltip title="raise an issue">
-                 <AddButton icon={ <BuildOutlined/>}  openModal={()=>setOpenIssuesForm(true)}/> ,
+                 <AddButton icon={ <BuildOutlined/>}  openModal={()=>setOpenIssueForm(true)}/> ,
               </Tooltip>,
             <Tooltip title="Import Products">
               <Dropdown overlay={ActionMenu}>
@@ -46,18 +87,8 @@ const ClientDetails = ({details,id}) => {
                </Tooltip>
               
          ]}>
-         <Avatar style={{ width:'200px',height:'200px'}}
-         src={details.photo}/>
-         
       
-         <Typography.Title level={4}>
-         {details.name}
-         </Typography.Title>
-         <Typography.Text>
-         {details.description}
-         </Typography.Text>
-        
-       
+        {content[key]}
         </Card>   
         <Issuesmodal visible={openIssueForm} onCancel={()=>setOpenIssueForm(false)} 
         currentBusinessId='4'/>

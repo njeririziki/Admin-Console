@@ -5,6 +5,7 @@ import Table from '@/components/tables/Expandable'
 import Ribbon  from '@/components/Ribbon'
 import List from '@/components/List/List'
 //import OnboardForm from '@/components/Modal/OnboardForm'
+import AddLocation from '@/components/Modal/AddLocation'
 import axios from 'axios'
 import { useRouter } from "next/router";
 import styles from '@/styles/clientid.module.scss'
@@ -88,6 +89,7 @@ const Client = ({}) => {
            <Table title={<Ribbon  tableTitle='Locations' buttonName='New location' openModal={()=>setVisible(true)}/>}
             data={location} columns={columns}
             pageSize={5}/>
+            <AddLocation/>
            <AddBusiness  visible={visible} onCancel={()=>setVisible(false)}/>
            {/* <OnboardForm visible={visible} onCancel={()=>setVisible(false)}
             modalTitle={'Vendors'} itemslabel={'List of vendors'}
