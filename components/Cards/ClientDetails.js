@@ -1,6 +1,6 @@
 import React, {useEffect,useState}from 'react'
 import {Card,Avatar,Typography,Tooltip,Menu,Dropdown, Button} from 'antd'
-import {EditOutlined,MoreHorizOutlined, BuildOutlined, AttachFileOutlined} from '@material-ui/icons'
+import {EditOutlined,MoreHorizOutlined, BuildOutlined,Person} from '@material-ui/icons'
 import OnboardForm from '@/components/Modal/OnboardForm'
 import Issuesmodal from '@/components/Modal/IssuesForm'
 import AddButton from '@/components/AddButton'
@@ -39,8 +39,8 @@ const Edit=({details})=>(
 const {Meta}= Card
 const {Item}= Menu
 const tablist=[
-    {key:'front', tab:'front'},
-    {key:'edit', tab: 'edit'}
+    {key:'front', tab: <Person/>},
+    {key:'edit', tab: <EditOutlined/>}
 ]
 
 
@@ -73,9 +73,7 @@ const ClientDetails = ({details,id}) => {
          //defaultActiveTabKey='details'
          onTabChange={key=> setKey(key)}
          actions={[
-            <Tooltip title="edit details">
-                    <AddButton icon={ <EditOutlined/>} openModal={()=>setOpenIssueForm(true)}/>,
-              </Tooltip>,
+           
             <Tooltip title="raise an issue">
                  <AddButton icon={ <BuildOutlined/>}  openModal={()=>setOpenIssueForm(true)}/> ,
               </Tooltip>,
